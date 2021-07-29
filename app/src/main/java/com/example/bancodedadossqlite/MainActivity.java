@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
             //indices da tabela
             int indiceNome = cursor.getColumnIndex("nome");
             int indiceIdade = cursor.getColumnIndex("idade");
-
+            cursor.moveToFirst();
             while (cursor != null){
                 Log.i("RESULTADO - nome: ", cursor.getString(indiceNome));
                 Log.i("RESULTADO - idade: ", cursor.getString(indiceIdade));
+                cursor.moveToNext();
             }
 
         }catch (Exception e){
