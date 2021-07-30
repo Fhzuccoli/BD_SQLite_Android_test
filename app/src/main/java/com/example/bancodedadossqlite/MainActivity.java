@@ -26,16 +26,25 @@ public class MainActivity extends AppCompatActivity {
             bancoDados.execSQL("INSERT INTO pessoas (nome, idade) VALUES ('Ful', 30)");
             bancoDados.execSQL("INSERT INTO pessoas (nome, idade) VALUES ('Sicl', 35)");
 
-            //recuperar pessoas
-            Cursor cursor = bancoDados.rawQuery("SELECT nome, idade FROM pessoas", null);
+            //recuperar pessoas - filtros
+            String consulta =
+                    "SELECT nome, idade" +
+                    "FROM pessoas " +
+                    "WHERE nome = 'Ful' AND idade = 30";
+
+            Cursor cursor = bancoDados.rawQuery(consulta, null);
 
             //indices da tabela
             int indiceNome = cursor.getColumnIndex("nome");
             int indiceIdade = cursor.getColumnIndex("idade");
+
             cursor.moveToFirst();
+
             while (cursor != null){
-                Log.i("RESULTADO - nome: ", cursor.getString(indiceNome));
-                Log.i("RESULTADO - idade: ", cursor.getString(indiceIdade));
+                String nome = cursor.getString(indiceNome);
+                String idade = cursor.getString(indiceIdade);
+                Log.i("RESULTADO - nome ", nome + " / idade: " + idade);
+
                 cursor.moveToNext();
             }
 
